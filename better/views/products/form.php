@@ -11,7 +11,7 @@
 <form method="post" enctype="multipart/form-data">
 
     <?php if ($product['Image']): ?>
-        <img src="<?php echo $product['Image'] ?>" class="product-img-view">
+        <img src="/<?php echo $product['Image'] ?>" class="product-img-view">
     <?php endif; ?>
   <br> <br>
     <div class="form-group">
