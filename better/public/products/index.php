@@ -1,7 +1,7 @@
 <?php 
 // to create connection to db
 
- require_once "../better/db.php";
+ require_once "../../better/db.php";
  
 $search = $_GET['search'] ?? '';
 if($search){
@@ -60,7 +60,7 @@ $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 
       <td>
             <?php if ($product['Image']): ?>
-                <img src="<?php echo $product['Image'] ?>" alt="<?php echo $product['Title'] ?>" class="product-img">
+                <img src="/<?php echo $product['Image'] ?>" alt="<?php echo $product['Title'] ?>" class="product-img">
             <?php endif; ?>
       </td>
       <td> <?php echo $product['Title'] ?> </td>

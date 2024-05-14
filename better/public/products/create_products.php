@@ -1,5 +1,5 @@
 <?php 
-require_once "functions.php";
+require_once "../../functions.php";
 // to create connection to db
 
 require_once "../better/db.php";
@@ -18,31 +18,8 @@ $product = [
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-    $price = $_POST['price'];
-
-    $image = $_FILES['image'] ?? null;
-    $imagePath = '';
-
-    if (!is_dir('images')) {
-        mkdir('images');
-    }
-
-    if ($image && $image['tmp_name']) {
-        $imagePath = 'images/' . randomString(8) . '/' . $image['name'];
-        mkdir(dirname($imagePath));
-        move_uploaded_file($image['tmp_name'], $imagePath);
-    }
-
-    if (!$title) {
-        $errors[] = 'Product title is required';
-    }
-
-    if (!$price) {
-        $errors[] = 'Product price is required';
-    }
+    
+    require_once "../../better/validate_products.php";
 
     if (empty($errors)) {
         $statement = $pdo->prepare("INSERT INTO products (title, image, description, price, create_date)
@@ -61,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 ?>
 
-<?php include_once "../better/views/partials/header.php"; ?>
+<?php include_once "../../better/views/partials/header.php"; ?>
 
 <body>
 <p>
@@ -70,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  <!----------------- table ------------------------>
  <h1>Create New Product</h1>
 
- <?php include_once "../better/views/products/form.php" ?>
+ <?php include_once "../../better/views/products/form.php" ?>
 
 </body>
 </html>
